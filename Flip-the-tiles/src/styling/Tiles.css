@@ -1,0 +1,26 @@
+.tiles{
+    display: flex;
+    flex-wrap: wrap ;
+    justify-content: space-between;
+    gap: 2vw;
+}
+.tile{
+    border:1px solid black;
+    border-radius: 5px;
+    height: 6vw; /* Responsive height */
+    width: 6vw;
+    min-width:40px ;
+    min-height: 40px;
+    font-size: clamp(1.5em, 4vw,4vw);
+}
+.num{
+    font-size: 1em;
+    font-weight: 500; 
+    user-select: none;   
+}
+.selected{
+    background-color:aquamarine;
+}
+.won{
+    background-color: rgb(208, 45, 45);
+}
