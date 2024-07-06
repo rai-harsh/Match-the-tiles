@@ -7,6 +7,8 @@ function App() {
 
   // STATE CONTAINING THE INITIAL TILES
   const [InitTile,setTiles]= React.useState(initialTiles);
+  const [Selection, setSelection]= React.useState([]);
+  //const [blinkId, setBlinkId] = React.useState(null);
 
   // functions that toggles the selected prop
   function toggle(id,num){
@@ -19,24 +21,14 @@ function App() {
     selection(id,num); 
   } 
 
-  // PUTTING THE SELECTED TILES IN A SEPARATE STATE 
-  const [Selection, setSelection]= React.useState([]);
   React.useEffect(() => {
     console.log(Selection); // This will log the updated state whenever it changes
   }, [Selection]);
 
-  // function failParent(){
-  //   React.useEffect(() => {
-  //     if (selection.length === 0) {
-  //       fail();
-  //     }
-  //   }, [selection]);  
-  // }
-
   // This function puts the selectedn  tile inside the array and checks for a match as well
   function selection(id,num){
     if(Selection.length==0){
-      setSelection((prevSelection) => [...prevSelection, {number :num , id : id}]); // Pushes the num of the selected object inside array
+      setSelection((prevSelection) => [...prevSelection, {number :num , id : id}]); // Pushes num of the selected object inside array
     }
     else if(Selection[0].number==num){
       setSelection((prevSelection)=>[]);
@@ -44,8 +36,18 @@ function App() {
       clean();
     }
     else if(Selection[0].number!=num){
+      //setBlinkId(id);
+      
       setSelection((prevSelection)=>[]);
-      clean();
+      
+      // setTimeout(() => {
+      //   setBlinkId(null);
+      //   clean();
+      // }, 100  );
+      
+      setTimeout(() => {
+        clean();
+      }, 400); 
     }
   }
 
