@@ -8,7 +8,6 @@ function App() {
   // STATE CONTAINING THE INITIAL TILES
   const [InitTile,setTiles]= React.useState(initialTiles);
   const [Selection, setSelection]= React.useState([]);
-  //const [blinkId, setBlinkId] = React.useState(null);
 
   // functions that toggles the selected prop
   function toggle(id,num){
@@ -26,25 +25,20 @@ function App() {
   }, [Selection]);
 
   // This function puts the selectedn  tile inside the array and checks for a match as well
-  function selection(id,num){
+  function selection(id,num)
+  {
     if(Selection.length==0){
       setSelection((prevSelection) => [...prevSelection, {number :num , id : id}]); // Pushes num of the selected object inside array
     }
-    else if(Selection[0].number==num){
+    else if(Selection[0].number==num && Selection[0].id != id){
       setSelection((prevSelection)=>[]);
       win(id,Selection[0].id);
       clean();
     }
-    else if(Selection[0].number!=num){
-      //setBlinkId(id);
-      
+    else {
+
       setSelection((prevSelection)=>[]);
-      
-      // setTimeout(() => {
-      //   setBlinkId(null);
-      //   clean();
-      // }, 100  );
-      
+
       setTimeout(() => {
         clean();
       }, 400); 
