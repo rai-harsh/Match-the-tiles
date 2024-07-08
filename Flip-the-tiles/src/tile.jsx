@@ -4,23 +4,31 @@ import './styling/Tiles.css';
 
 export default function Tile(props)
 {
-    if(props.won==true){
-        var color = "won";
-        var todo = ()=>{alreadyWon()};   
+    const [isInitiallyClicked, setIsInitiallyClicked] = useState(true);
+
+    useEffect(() => {
+    const timer = setTimeout(() => {
+        setIsInitiallyClicked(false);
+      }, 3000); // 3 seconds
+
+      // Cleanup the timer if the component is unmounted
+    return () => clearTimeout(timer);
+    }, []);
+    
+    let color, todo;
+    if(props.won==true){    
+        color = "won clicked";
+        todo = ()=>{alert("Already won")};   
     }else{
-    var color =  props.selected ? "clicked" : ""; 
-    var todo = ()=>{props.handleClick()};   
+        color =  (props.selected || isInitiallyClicked) ? "clicked" : "";
+        todo = ()=>{props.handleClick()};   
     }
-    console.log(props.src);
-    function alreadyWon(){
-        alert("Already won")
-    }
+
+
     return(
 
-    <div  className={`tile ${color}`} onClick={todo}  >
-        {/* <spam>{props.num}</spam> */}
+    <div  className={`tile ${color} `} onClick={todo}  >
         <img src ={props.src} />
-        {/* if the won is true then just permanently attach the selected class */}
     </div>
 
 )

@@ -7,7 +7,7 @@ for (var i = 1; i < 26; i++) {
     });
     arr.push({
         number :i,
-        img:`../public/icons/${i}.svg`
+        img:`../public/icons/${i}.svg`      
     });
 }
 

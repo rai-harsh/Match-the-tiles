@@ -8,6 +8,7 @@ function App() {
   // STATE CONTAINING THE INITIAL TILES
   const [InitTile,setTiles]= React.useState(initialTiles);
   const [Selection, setSelection]= React.useState([]);
+  const [Count,SetCount]=React.useState(0);
 
   // functions that toggles the selected prop
   function toggle(id,num){
@@ -20,10 +21,6 @@ function App() {
     selection(id,num); 
   } 
 
-  React.useEffect(() => {
-    console.log(Selection); // This will log the updated state whenever it changes
-  }, [Selection]);
-
   // This function puts the selectedn  tile inside the array and checks for a match as well
   function selection(id,num)
   {
@@ -31,11 +28,15 @@ function App() {
       setSelection((prevSelection) => [...prevSelection, {number :num , id : id}]); // Pushes num of the selected object inside array
     }
     else if(Selection[0].number==num && Selection[0].id != id){
+      SetCount((item)=> {return ++item}) 
       setSelection((prevSelection)=>[]);
       win(id,Selection[0].id);
       clean();
     }
     else {
+      if(Selection[0].id != id){
+        SetCount((item)=> {return ++item}) ;
+      }
       setSelection((prevSelection)=>[]);
       setTimeout(() => {
         clean();
@@ -72,9 +73,12 @@ function App() {
   )});
 
     return (
-    <div className='tiles'>
-     {tiles}
-    </div>
+      <>
+        <h1>Moves taken : {Count}</h1>
+        <div className='tiles'>
+          {tiles}
+        </div>
+      </>
   )
 }
 
