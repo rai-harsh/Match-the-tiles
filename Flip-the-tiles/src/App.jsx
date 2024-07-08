@@ -36,9 +36,7 @@ function App() {
       clean();
     }
     else {
-
       setSelection((prevSelection)=>[]);
-
       setTimeout(() => {
         clean();
       }, 400); 
@@ -69,6 +67,7 @@ function App() {
       won = {item.won}
       num = {item.num}
       handleClick={()=>toggle(item.id,item.num)}
+      src={item.img}
     />
   )});
 
